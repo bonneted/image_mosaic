@@ -1,0 +1,32 @@
+function make_zoom_video(mosaic,VideoName)
+
+
+v = VideoWriter(VideoName,'MPEG-4');
+v.Quality = 100;
+open(v);
+
+figure('units','normalized','outerposition',[0 0 0.5625 1])%,'visible','off')
+
+% 
+image(mosaic);
+set(gca,'LooseInset',get(gca,'TightInset'));
+axis equal
+axis off
+
+zoom(1.03^140)
+
+    
+for k=1:140
+    zoom(1/1.03)
+    frame = getframe(gcf);
+    writeVideo(v,frame);
+    writeVideo(v,frame);
+
+end
+
+zoom(1.03)
+frame = getframe(gcf);
+writeVideo(v,frame);
+writeVideo(v,frame);
+
+close(v);
