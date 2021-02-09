@@ -1,14 +1,14 @@
 %% Settings
-RessourceFolder = uigetdir('C:\Users\Damien\Documents\mosaic','Select the ressource folder');
-[pattern_name,pattern_folder] = uigetfile('*.*','Select the pattern of the mosaic');
+RessourceFolder = uigetdir('P:\Montage photo\','Select the ressource folder');
+[pattern_name,pattern_folder] = uigetfile('P:\Montage photo\','Select the pattern of the mosaic');
 pattern_path = fullfile(pattern_folder,pattern_name);
 [~,pattern_name,~] = fileparts(pattern_path);
 tic
 resolution = 200; %resolution (pixel) of the small images
 W_mosaic = 75; %number of images in the width of the mosaic -> 75 for 1m width after printing (1,3cm width for small images)
-Mode = 'occurence'; %matching method
-NbChoice = 25;
-alpha = 0.3; %transparency of the overlay mosaic
+Mode = 'remote'; %matching method
+NbChoice = 50;
+alpha = 0.1; %transparency of the overlay mosaic
 %% Translating settings
 addpath(genpath('C:\Users\Damien\Documents\code_perso\image_mosaic'))
 pattern_HR = imread(pattern_path);
@@ -34,7 +34,7 @@ disp(' Preparing pattern...')
 MatrixRef = make_MatrixPattern_4px(pattern_LR);
 %% Matching image and pixels
 disp('Matching image and pixels...')
-MatchIndices = match_PixIm(Cases_MeanMatrix,MatrixRef,Mode,NbChoice);
+MatchIndices = match_PixIm(Cases_MeanMatrix,MatrixRef,Mode,NbChoice,H_mosaic);
 %% Making mosaic
 disp('Making mosaic...')
 mosaic = make_Mosaic(MatchIndices,Cases_Index,H_mosaic,W_mosaic);
@@ -50,7 +50,7 @@ imwrite(overlay_mosaic,strcat(FileName,'_overlay_LR.jpg'),'Quality',40);
 imwrite(overlay_mosaic,strcat(FileName,'_overlay_HR.jpg'),'Quality',75);
 %% Making zoom video
 disp('Making zoom video...')
-VideoName = strcat(FileName,'_zoom.mp4');
+VideoName = strcat(FileName,'_zoom2.mp4');
 make_zoom_video(overlay_mosaic,VideoName);
 %% Open results directory
 disp('Open results directory...')
