@@ -23,7 +23,7 @@ end
 if strcmp(Mode,'remote')
     MatchIndicesK = knnsearch(Cases_MeanMatrix,MatrixRef,'K',NbChoice);
     MatchIndices = zeros(length(MatchIndicesK),1);
-    ImLocation = cell(length(MatchIndicesK),1);
+    ImLocation = cell(length(Cases_MeanMatrix),1);
     ImLocation(:) = {[H_mosaic*10 H_mosaic*10]};
 
     for ii=1:length(MatchIndicesK)
@@ -32,8 +32,9 @@ if strcmp(Mode,'remote')
         pos = [x,y];
         ImDistMin = zeros(1,NbChoice);
         for kk=1:NbChoice
-%             disp(kk)
-%             disp(MatchIndicesK(ii,kk))
+%             disp([ii,kk])
+%             disp(size(MatchIndicesK))
+%             disp(MatchIndicesK(1,1))
             occ_location = ImLocation{MatchIndicesK(ii,kk)};
             ImDistMin(kk) = norm(occ_location(knnsearch(occ_location,pos),:)-pos);
         end

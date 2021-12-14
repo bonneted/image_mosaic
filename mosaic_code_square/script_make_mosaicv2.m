@@ -5,9 +5,9 @@ pattern_path = fullfile(pattern_folder,pattern_name);
 [~,pattern_name,~] = fileparts(pattern_path);
 tic
 resolution = 200; %resolution (pixel) of the small images
-W_mosaic = 75; %number of images in the width of the mosaic -> 75 for 1m width after printing (1,3cm width for small images)
+W_mosaic = 100; %number of images in the width of the mosaic -> 75 for 1m width after printing (1,3cm width for small images)
 Mode = 'remote'; %matching method
-NbChoice = 50;
+NbChoice = 25;
 alpha = 0.1; %transparency of the overlay mosaic
 %% Translating settings
 addpath(genpath('C:\Users\Damien\Documents\code_perso\image_mosaic'))
